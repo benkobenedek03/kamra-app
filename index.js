@@ -30,7 +30,7 @@ app.get("/items",async (req,res)=>{
 
     const read= await getData()
 
-    const data=read? JSON.parse(read):[]
+    const data=read?JSON.parse(read):[]
     
     if (req.query.category) {
         const filtered=data.filter(product=>product.category==req.query.category)

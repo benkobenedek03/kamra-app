@@ -5,9 +5,6 @@ services:
     build: .
     ports:
       - "3000:3000"
-    volumes:
-      # ÖSSZEKÖTJÜK A GÉPEDET A KONTÉNERREL:
-      # A bal oldal (./data) a te gépeden lévő mappa.
-      # A jobb oldal (/app/data) a konténer belső mappája.
+    volumes:     
       - ./data:/app/data
     restart: unless-stopped

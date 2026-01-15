@@ -1,28 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamra App</title>
+    <title>Otthoni Kamra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div>
-        <input type="text" id="name" name="name">
-        <input type="number" id="quantity" name="quantity">
-        <input type="text" id="unit" name="unit">
-        <select name="" id="category" name="category">
-            <option value="none">Válassz egy kategriát</option>
-            <option value="Fagyasztott" >Fagyasztott</option>
-            <option value="Tészták">Tészták</option>
-            <option value="Pékáru">Pékáru</option>
-        </select>
-        <button onclick="saveProduct()">Save</button>
+
+    <div class="header-bg text-center">
+        <h1><i class="fas fa-carrot"></i> Otthoni Kamra</h1>
+        <p class="mb-0 opacity-75">Mi van itthon?</p>
     </div>
 
-    <ul id="product-list">
+    <div class="container main-container">
+        
+        <div class="card card-custom p-4 mb-4">
+            <h5 class="mb-3 text-secondary"><i class="fas fa-plus-circle"></i> Új termék felvétele</h5>
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <input type="text" id="name" class="form-control" placeholder="Termék neve (pl. Tej)">
+                </div>
+                <div class="col-6 col-md-2">
+                    <input type="number" id="quantity" class="form-control" value="1" placeholder="Db">
+                </div>
+                <div class="col-6 col-md-2">
+                    <input type="text" id="unit" class="form-control" placeholder="Egység">
+                </div>
+                <div class="col-md-3">
+                    <select id="category" class="form-select">
+                        <option value="Hűtő">🧊 Hűtő</option>
+                        <option value="Spájz">🥫 Spájz</option>
+                        <option value="Fagyasztó">❄️ Fagyasztó</option>
+                        <option value="Egyéb">📦 Egyéb</option>
+                    </select>
+                </div>
+                <div class="col-md-1 d-grid">
+                    <button onclick="saveProduct()" class="btn btn-success"><i class="fas fa-check"></i></button>
+                </div>
+            </div>
+        </div>
 
-    </ul>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="text-secondary mb-0">Termékek</h5>
+            <select id="filter" onchange="loadItems()" class="form-select w-auto form-select-sm">
+                <option value="">Összes megjelenítése</option>
+                <option value="Hűtő">Csak Hűtő</option>
+                <option value="Spájz">Csak Spájz</option>
+                <option value="Fagyasztó">Csak Fagyasztó</option>
+            </select>
+        </div>
+
+        <div id="product-list" class="row row-cols-1 row-cols-md-2 g-3">
+            </div>
+
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
