@@ -2,17 +2,24 @@ const express=require("express")
 const app = express()
 const path = require("path")
 const fs = require("fs/promises")
+const { text } = require("stream/consumers")
+const { stringify } = require("querystring")
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname,"public")))
 
-
+const DATA_PATH=path.join(__dirname,"data","products.json")
 
 const getData = async ()=>{
-    return await fs.readFile(path.join(__dirname,"data","products.json"),"utf-8")
+    try {
+        return await fs.readFile(DATA_PATH,"utf-8")
+    } catch (error) {
+        return "[]"
+    }
+    
 }
 const saveData = async (products)=>{
-    await fs.writeFile(path.join(__dirname,"data","products.json"),JSON.stringify(products))
+    await fs.writeFile(DATA_PATH,JSON.stringify(products,null,2))
 }
 
 app.get("/", (req,res)=> {
@@ -22,30 +29,43 @@ app.get("/", (req,res)=> {
 app.get("/items",async (req,res)=>{
 
     const read= await getData()
-    const data=JSON.parse(read)
+
+    const data=read? JSON.parse(read):[]
     
+    if (req.query.category) {
+        const filtered=data.filter(product=>product.category==req.query.category)
+        return res.json(filtered)
+    }
+
     res.json(data)
-
-})
-
-app.get("/items/:id", (req,res)=>{
-    res.json({id:req.params.id})
 })
 
 app.post("/items", async (req,res) =>{
     let data= JSON.parse(await getData())
 
-    const body ={
-        name:req.body.name,
-        quantity:req.body.quantity,
-        unit:req.body.unit
+    const product ={
+        id:Date.now(),
+        name:String(req.body.name),
+        quantity:Number(req.body.quantity),
+        unit:String(req.body.unit)
     } 
-    data.push(body)
+    data.push(product)
 
     await saveData(data)
     
+    res.json(product)
+})
+
+app.delete("/items/:id", async (req,res)=>{
+    const data = JSON.parse(await getData());
+    const id=Number(req.params.id)
     
-    res.json({status:"ok"})
+    const re=data.filter(p=>p.id==id)
+    const deleteId=data.filter(product=>product.id!==id)
+
+    await saveData(deleteId)
+
+    res.json(re)
 })
 
 

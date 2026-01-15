@@ -4,7 +4,6 @@ async function getData(){
         console.log("asd")
         const response = await fetch('/items');
         const items = await response.json();
-        console.log(items);
         loadData(items)
         return items;
 
@@ -23,10 +22,16 @@ async function loadData(items)
      items.forEach(element => {
         const li = document.createElement('li')
         li.innerHTML=
-        li.innerHTML = `${element.name} - ${element.quantity} ${element.unit}`
+        li.innerHTML = `${element.name} - ${element.quantity} ${element.unit} <button onclick="deleteProduct(${element.id})"> Törlés</button>`
         list.appendChild(li)
         
      });
+}
+async function deleteProduct(id) {
+    console.log(id)
+    const response = await fetch(`/items/${id}`, {method:"DELETE"})
+    console.log(await response.json())
+    getData()
 }
 
 async function saveProduct()
