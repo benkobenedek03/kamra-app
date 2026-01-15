@@ -18,4 +18,4 @@ RUN mkdir -p data
 EXPOSE 3000
 
 # Indítás
-CMD ["node", "server.js"]
+CMD ["node", "index.js"]
