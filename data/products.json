@@ -5,12 +5,6 @@
     "quantity": 1,
     "unit": "kg",
     "category": "Hűtő"
-  },
-  {
-    "id": 1768484382809,
-    "name": "tej",
-    "quantity": 5,
-    "unit": "l",
-    "category": "Hűtő"
   }
+  
 ]

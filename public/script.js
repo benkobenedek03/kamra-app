@@ -2,7 +2,7 @@ async function getData(){
     try {
         const response = await fetch('/items');
         const items = await response.json();
-        loadData(items)
+        //loadData(items)
         return items;
 
     } catch (error) {
@@ -64,6 +64,12 @@ function loadData(items) {
                         <button class="btn btn-outline-primary btn-circle btn-sm" 
                                 onclick="changeQuantity(${element.id}, ${element.quantity + 1})">
                             <i class="fas fa-plus"></i>
+                        </button>
+                        
+                        <button class="btn btn-light text-danger btn-sm ms-2" 
+                                onclick="deleteProduct(${element.id})" 
+                                title="Törlés">
+                            <i class="fas fa-trash-alt"></i>
                         </button>
                         
                         <button class="btn btn-light text-danger btn-sm ms-2" 
@@ -143,4 +149,4 @@ async function saveProduct(){
     console.log(await response.json())
     await loadData(await getData()) 
 }
-getData()
+loadData(await getData())
