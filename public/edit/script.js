@@ -44,7 +44,7 @@ async function save() {
             }
         )
     })
-
+    goBack()
 }
 
 function goBack()
