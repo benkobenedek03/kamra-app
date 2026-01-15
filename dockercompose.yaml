@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  kamra-app:
+    container_name: kamra-szerver
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      # ÖSSZEKÖTJÜK A GÉPEDET A KONTÉNERREL:
+      # A bal oldal (./data) a te gépeden lévő mappa.
+      # A jobb oldal (/app/data) a konténer belső mappája.
+      - ./data:/app/data
+    restart: unless-stopped

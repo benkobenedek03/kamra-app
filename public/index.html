@@ -8,9 +8,15 @@
 <body>
     
     <div>
-        <input type="text" id="n">
-        <input type="text" id="q">
-        <input type="text" id="u">
+        <input type="text" id="name" name="name">
+        <input type="number" id="quantity" name="quantity">
+        <input type="text" id="unit" name="unit">
+        <select name="" id="category" name="category">
+            <option value="none">Válassz egy kategriát</option>
+            <option value="Fagyasztott" >Fagyasztott</option>
+            <option value="Tészták">Tészták</option>
+            <option value="Pékáru">Pékáru</option>
+        </select>
         <button onclick="saveProduct()">Save</button>
     </div>
 
