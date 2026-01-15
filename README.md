@@ -1,6 +1,6 @@
 # How to run
-git clone https://github.com/benkobenedek03/kamra-app.git
-docker-compose up -d --build
+- git clone https://github.com/benkobenedek03/kamra-app.git
+- docker-compose up -d --build
 
 # Features list:
 - Termékek hozzáadása/törlése/szerkesztése
