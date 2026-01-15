@@ -45,10 +45,11 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+       <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="text-secondary mb-0">Termékek</h5>
             <select id="filter" onchange="loadItems()" class="form-select w-auto form-select-sm">
                 <option value="">Összes megjelenítése</option>
+                <option value="MISSING">⚠️ Csak ami elfogyott</option> <option disabled>──────────</option>
                 <option value="Hűtő">Csak Hűtő</option>
                 <option value="Spájz">Csak Spájz</option>
                 <option value="Fagyasztó">Csak Fagyasztó</option>
@@ -56,7 +57,7 @@
         </div>
 
         <div id="product-list" class="row row-cols-1 row-cols-md-2 g-3">
-            </div>
+        </div>
 
     </div>
 

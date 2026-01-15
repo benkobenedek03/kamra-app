@@ -54,3 +54,19 @@
             text-align: center;
             display: inline-block;
         }
+
+
+        .card-missing {
+    background-color: #fff5f5;     
+    border: 1px solid #ffc9c9;     
+    opacity: 0.9;
+}
+.card-missing .card-title {
+    text-decoration: line-through;  
+    color: #dc3545 !important;     
+}
+
+.card-missing .btn-minus {
+    opacity: 0.3;
+    pointer-events: none;
+}

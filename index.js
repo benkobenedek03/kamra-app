@@ -26,16 +26,24 @@ app.get("/", (req,res)=> {
     res.send()
 })
 
-app.get("/items",async (req,res)=>{
-
-    const read= await getData()
-
-    const data=read?JSON.parse(read):[]
+app.get("/items", async (req, res) => {
+    const read = await getData()
+    let data = read ? JSON.parse(read) : []
     
-    if (req.query.category) {
-        const filtered=data.filter(product=>product.category==req.query.category)
-        return res.json(filtered)
+    const filter = req.query.category;
+
+    if (filter) {
+        if (filter === "MISSING") {
+            // SPECIÁLIS SZŰRŐ: Csak ami elfogyott (quantity == 0)
+            data = data.filter(item => item.quantity === 0);
+        } else {
+            // NORMÁL SZŰRŐ: Kategória szerint
+            data = data.filter(item => item.category === filter);
+        }
     }
+
+    // Opcionális: Rendezzük úgy, hogy a 0 mennyiségűek legyenek legelöl
+    data.sort((a, b) => a.quantity - b.quantity); 
 
     res.json(data)
 })

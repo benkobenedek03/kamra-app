@@ -8,7 +8,6 @@ async function getData(){
     } catch (error) {
         alert("nem sikerült betölteni az oldalt")
     }
-
 }
 
 
@@ -26,14 +25,20 @@ function loadData(items) {
     }
 
     items.forEach(element => {
-        // Kiválasztjuk a megfelelő CSS osztályt a kategória színezetéhez
         const catClass = `cat-${element.category}`;
         
+        // Ellenőrizzük, hogy elfogyott-e
+        const isMissing = element.quantity === 0;
+        
+        // Ha elfogyott, hozzáadjuk a 'card-missing' osztályt
+        const missingClass = isMissing ? 'card-missing' : '';
+        const minusBtnClass = isMissing ? 'btn-minus' : ''; // CSS-hez kell
+
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'col'; // Bootstrap grid oszlop
+        cardDiv.className = 'col';
         
         cardDiv.innerHTML = `
-            <div class="card card-custom h-100">
+            <div class="card card-custom h-100 ${missingClass}">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     
                     <div>
@@ -41,11 +46,12 @@ function loadData(items) {
                         <span class="badge badge-category ${catClass}">
                             ${element.category}
                         </span>
+                        ${isMissing ? '<span class="badge bg-danger ms-1">ELFOGYOTT</span>' : ''}
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
                         
-                        <button class="btn btn-outline-secondary btn-circle btn-sm" 
+                        <button class="btn btn-outline-secondary btn-circle btn-sm ${minusBtnClass}" 
                                 onclick="changeQuantity(${element.id}, ${element.quantity - 1})">
                             <i class="fas fa-minus"></i>
                         </button>
