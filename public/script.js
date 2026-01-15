@@ -2,7 +2,7 @@ async function getData(){
     try {
         const response = await fetch('/items');
         const items = await response.json();
-        //loadData(items)
+        loadData(items)
         return items;
 
     } catch (error) {
@@ -72,11 +72,9 @@ function loadData(items) {
                             <i class="fas fa-trash-alt"></i>
                         </button>
                         
-                        <button class="btn btn-light text-danger btn-sm ms-2" 
-                                onclick="deleteProduct(${element.id})" 
-                                title="Törlés">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
+                        <a href="edit/edit.html?id=${element.id}" class="btn btn-light text-primary btn-sm ms-1" title="Szerkesztés">
+                            <i class="fas fa-edit"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -149,4 +147,4 @@ async function saveProduct(){
     console.log(await response.json())
     await loadData(await getData()) 
 }
-loadData(await getData())
+getData()

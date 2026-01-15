@@ -48,6 +48,14 @@ app.get("/items", async (req, res) => {
     res.json(data)
 })
 
+app.get('/items/:id', async (req,res)=>{
+    const data = JSON.parse(await getData())
+    const id=Number(req.params.id)
+    const product=data.filter(product=>product.id==id)
+
+    res.json(product[0])
+})
+
 app.post("/items", async (req,res) =>{
     let data= JSON.parse(await getData())
 

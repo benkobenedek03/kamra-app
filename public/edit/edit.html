@@ -3,9 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <title>Szerkesztés</title>
 </head>
 <body>
+   <div class="container p-3">
+        <div class="card edit-card mx-auto">
+            
+            <div class="card-header-custom">
+                <h3 class="mb-0"><i class="fas fa-edit"></i> Termék Szerkesztése</h3>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Termék neve</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-tag text-secondary"></i></span>
+                        <input type="text" id="name" class="form-control" placeholder="pl. Tej">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-6">
+                        <label for="quantity" class="form-label">Mennyiség</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-sort-numeric-up text-secondary"></i></span>
+                            <input type="number" id="quantity" class="form-control" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="unit" class="form-label">Egység</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-ruler text-secondary"></i></span>
+                            <input type="text" id="unit" class="form-control" placeholder="db, kg...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="category" class="form-label">Kategória</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-folder text-secondary"></i></span>
+                        <select name="category" id="category" class="form-select">
+                            <option value="Hűtő">🧊 Hűtő</option>
+                            <option value="Spájz">🥫 Spájz</option>
+                            <option value="Fagyasztó">❄️ Fagyasztó</option>
+                            <option value="Egyéb">📦 Egyéb</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button onclick="goBack()" class="btn btn-light flex-grow-1 text-secondary">
+                        Vissza
+                    </button>
+                    <button onclick="save()" class="btn btn-primary btn-save flex-grow-1 text-white">
+                        <i class="fas fa-save"></i> Mentés
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
     
 
     <script src="script.js"></script>

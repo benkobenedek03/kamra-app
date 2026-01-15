@@ -1,10 +1,16 @@
 [
   {
     "id": 1768482895762,
-    "name": "alma",
+    "name": "körte",
     "quantity": 1,
     "unit": "kg",
     "category": "Hűtő"
+  },
+  {
+    "id": 1768513350916,
+    "name": "tejföl",
+    "quantity": 2,
+    "unit": "l",
+    "category": "Fagyasztó"
   }
-  
 ]
