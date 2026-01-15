@@ -1,5 +1,4 @@
-<img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/1111ecb9-3382-4234-b8c9-0622ce6a3e09" />
-
+<img width="501" height="916" alt="image" src="https://github.com/user-attachments/assets/1111ecb9-3382-4234-b8c9-0622ce6a3e09" />
 
 #How to run
 git clone https://github.com/benkobenedek03/kamra-app.git
