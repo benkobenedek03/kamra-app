@@ -129,30 +129,21 @@ async function changeQuantity(id, quantity) {
 
 async function saveProduct(){
 
-    const name=document.querySelector('#name').value
-    const quantity=document.querySelector('#quantity').value
-    const unit=document.querySelector('#unit').value
-    const category=document.querySelector('#category').value
+    const name=document.querySelector('#name')
+    const quantity=document.querySelector('#quantity')
+    const unit=document.querySelector('#unit')
+    const category=document.querySelector('#category')
 
-    if (category=="none") {
-       return alert("Válasz egy kategóriát!")
-    }
-
-    console.log({
-        name:name,
-        quantity:quantity,
-        unit:unit,
-        category:category
-    })
+    
     
 
     const response= await fetch("/items", {
         method:"POST",
         body: JSON.stringify({
-        name:name,
-        quantity:quantity,
-        unit:unit,
-        category:category
+        name:name.value,
+        quantity:quantity.value,
+        unit:unit.value,
+        category:category.value
     }),
         headers:{
              "Content-Type": "application/json",
@@ -160,5 +151,8 @@ async function saveProduct(){
     })
     console.log(await response.json())
     await loadData(await getData()) 
+    name.value=""
+    quantity.value=1
+    unit.value=""
 }
 getData()
