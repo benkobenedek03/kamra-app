@@ -4,8 +4,11 @@
 
 # Features list:
 - Termékek hozzáadása/törlése/szerkesztése
-- Intelligens mennyiségkezelés (+/- gombok egyedi lépésközzel)
+- Mennyiségkezelés (+/- gombok)
 - "Elfogyott" termékek automatikus kiemelése és szűrése
 - Adatmegmaradás (Persistent Storage)
 
-<img width="499" height="916" alt="image" src="https://github.com/user-attachments/assets/7e416d80-21ce-477d-994d-c828dca2a613" />
+
+<img width="482" height="916" alt="image" src="https://github.com/user-attachments/assets/48d382a1-9c9f-489b-a113-aeb678fed06f" />
+<img width="504" height="917" alt="image" src="https://github.com/user-attachments/assets/6f830cb3-a77f-4628-bc2a-23cb94fffea1" />
+
