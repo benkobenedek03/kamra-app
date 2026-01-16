@@ -46,7 +46,7 @@ app.get("/items", async (req, res) => {
 
     if(search)
     {
-        data = data.filter(item=>item.name.toLowerCase().includes(search))
+        data = data.filter(item=>item.name.toLowerCase().includes(search.toLowerCase()))
     }
 
     // Opcionális: Rendezzük úgy, hogy a 0 mennyiségűek legyenek legelöl
