@@ -85,10 +85,14 @@ function loadData(items) {
 
 
 async function deleteProduct(id) {
-    console.log(id)
-    const response = await fetch(`/items/${id}`, {method:"DELETE"})
-    console.log(await response.json())
-    getData()
+    
+    if(confirm("Biztos törlöd?"))
+    {
+        const response = await fetch(`/items/${id}`, {method:"DELETE"})
+        console.log(await response.json())
+        getData()
+    }
+   
 }
 
 async function loadItems() {
