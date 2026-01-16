@@ -83,6 +83,16 @@ function loadData(items) {
     });
 }
 
+async function searchItem() {
+
+    
+    const search = String(document.querySelector('#search').value)
+    const response = await fetch(`/items?search=${search}`)
+    const items = await response.json()
+    loadData(items)
+    
+    
+}
 
 async function deleteProduct(id) {
     

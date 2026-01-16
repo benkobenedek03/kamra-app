@@ -32,6 +32,8 @@ app.get("/items", async (req, res) => {
     
     const filter = req.query.category;
 
+    const search=req.query.search;
+
     if (filter) {
         if (filter === "MISSING") {
             // SPECIÁLIS SZŰRŐ: Csak ami elfogyott (quantity == 0)
@@ -40,6 +42,11 @@ app.get("/items", async (req, res) => {
             // NORMÁL SZŰRŐ: Kategória szerint
             data = data.filter(item => item.category === filter);
         }
+    }
+
+    if(search)
+    {
+        data = data.filter(item=>item.name.toLowerCase().includes(search))
     }
 
     // Opcionális: Rendezzük úgy, hogy a 0 mennyiségűek legyenek legelöl
