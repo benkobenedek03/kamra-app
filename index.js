@@ -2,10 +2,12 @@ const express=require("express")
 const app = express()
 const path = require("path")
 const fs = require("fs/promises")
-const { text, json } = require("stream/consumers")
-const { stringify } = require("querystring")
+const list = require("./routes/list")
+//const { text, json } = require("stream/consumers")
+//const { stringify } = require("querystring")
 
 app.use(express.json())
+app.use("/list",list)
 app.use(express.static(path.join(__dirname,"public")))
 
 const DATA_PATH=path.join(__dirname,"data","products.json")
@@ -112,7 +114,6 @@ app.put("/items/:id", async (req,res)=> {
         await saveData(data)
         res.json({update:"success"})
 })
-
 
 
 app.listen(3000, ()=>{console.log("http://localhost:3000")})
