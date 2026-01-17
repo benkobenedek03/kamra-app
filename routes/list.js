@@ -8,7 +8,9 @@ const DATA_PATH=path.join((__dirname),'..','data','list.json')
 
 const getData = async ()=>{
     try{
-           return await fs.readFile(DATA_PATH, 'utf-8')
+           const re= await fs.readFile(DATA_PATH, 'utf-8')
+           const response=re?re:'[]'
+           return response
     } catch (error) {
         return '[]'
     }
@@ -25,10 +27,22 @@ router.get('/',async (req,res)=>{
 
 router.post('/', async (req,res)=> {
     let list=JSON.parse(await getData())
-    list.push(req.body)
+    let item=req.body
+    item.id=Date.now()
+    list.push(item)
     writeFile(list)
+    
+    res.json({success:true})
+})
+router.delete('/:id',async (req,res)=>{
+    const id=Number(req.params.id)
+    let data=JSON.parse(await getData())
+    if (id) {
+       data=data.filter(item=>item.id!=id) 
+    }
 
-    res.json({status:"ok"})
+    writeFile(data)
+    res.json({success:true})
 })
 
 
