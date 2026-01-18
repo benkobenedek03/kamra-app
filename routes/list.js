@@ -21,7 +21,13 @@ const writeFile=async(list)=>{
 
 router.get('/',async (req,res)=>{
     
-    const list= JSON.parse(await getData())
+    let list= JSON.parse(await getData())
+
+    const toWho=req.query.towho
+    if (toWho) {
+        data=data.filter(item=> item.forWho==toWho)
+    }
+
     res.json(list)
 })
 
@@ -29,18 +35,19 @@ router.post('/', async (req,res)=> {
     let list=JSON.parse(await getData())
     let item=req.body
     item.id=Date.now()
+    item.shop=item.shop.toLowerCase()
     list.push(item)
     writeFile(list)
     
     res.json({success:true})
 })
+
 router.delete('/:id',async (req,res)=>{
     const id=Number(req.params.id)
     let data=JSON.parse(await getData())
     if (id) {
        data=data.filter(item=>item.id!=id) 
     }
-
     writeFile(data)
     res.json({success:true})
 })

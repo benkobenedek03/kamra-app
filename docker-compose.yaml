@@ -7,5 +7,5 @@ services:
       - "3000:3000"
     volumes:     
       #- ./data:/app/data
-      - ../kamra-app:/app/data
+      - ../kamra-app-data:/app/data
     restart: unless-stopped

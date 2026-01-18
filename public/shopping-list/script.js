@@ -25,13 +25,13 @@ async function sendData() {
     }else{
         alert("Hiba történt")
     }
+    await loadData()
 
 
 }
 async function loadData() {
     const res= await fetch('/list')
     const list= await res.json()
-    console.log(list)
     displayData(list)
     return list
 }
@@ -76,10 +76,19 @@ function displayData(list) {
     });
 }
 
-function deleteItem(id) {
-    //todo
+async function deleteItem(id) {
+        
+    if (confirm("Biztosan törlöd?")) {
+
+        const res=await fetch(`/list/${id}`,{
+            method:'DELETE'
+        })
+
+        const success=res.json().success
+    }
+    loadData()
+
+    
 }
-
-
 
 loadData()
