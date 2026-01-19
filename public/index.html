@@ -49,8 +49,8 @@
 
        <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="text-secondary mb-0">Termékek</h5>
-            <select id="filter" onchange="loadItems()" class="form-select w-auto form-select-sm">
-                <option value="">Összes megjelenítése</option>
+            <select id="filter" onchange="filterItems(this.value)" class="form-select w-auto form-select-sm">
+                <option value="mind">Összes megjelenítése</option>
                 <option value="MISSING">⚠️ Csak ami elfogyott</option> <option disabled>──────────</option>
                 <option value="Hűtő">Csak Hűtő</option>
                 <option value="Spájz">Csak Spájz</option>

@@ -1,23 +1,10 @@
 [
   {
-    "name": "a",
+    "name": "cukor",
     "quantity": "1",
-    "shop": "a",
-    "unit": "kg",
-    "forWho": "Otthonra"
-  },
-  {
-    "name": "a",
-    "quantity": "1",
-    "shop": "a",
-    "unit": "kg",
-    "forWho": "Otthonra"
-  },
-  {
-    "name": "tejföl",
-    "quantity": "1",
-    "shop": "ad",
-    "unit": "a",
-    "forWho": "Otthonra"
+    "shop": "auchan",
+    "unit": "csomag",
+    "forWho": "otthon",
+    "id": 1768781267547
   }
 ]

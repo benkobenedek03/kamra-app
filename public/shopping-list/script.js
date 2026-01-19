@@ -1,39 +1,45 @@
+let itemList=[];
+
 async function sendData() {
     const name = document.querySelector('#name')
     const shop = document.querySelector('#shop')
     const quantity = document.querySelector('#quantity')
     const unit = document.querySelector('#unit')
     const forWho = document.querySelector('#forWho')
+    const forWhoFilter = document.querySelector('#toWho-filter')
+    const shopFilter = document.querySelector('#shop-filter')
 
+    const item={name:name.value,
+                quantity:quantity.value,
+                shop:shop.value,
+                unit:unit.value,
+                forWho:forWho.value
+            }
     const re=await fetch('/list', {
         method:'POST',
-        body: JSON.stringify({
-            name:name.value,
-            quantity:quantity.value,
-            shop:shop.value,
-            unit:unit.value,
-            forWho:forWho.value
-        }),
+        body: JSON.stringify(item),
     headers:{"Content-Type": "Application/Json"}
     })
     const response=await re.json()
     if (response.success) {
         name.value=''
-        shop.value=''
         quantity.value=1
         unit.value=''
+        shopFilter.value='minden'
+        forWhoFilter.value='minden'
     }else{
         alert("Hiba történt")
     }
-    await loadData()
+    
+    //kell az init, mert a backenden kap ID-t, így ha csak pusholom a listába nincs ID
+    init()
 
 
 }
 async function loadData() {
     const res= await fetch('/list')
     const list= await res.json()
-    displayData(list)
-    return list
+    itemList=list
 }
 function displayData(list) {
     const shoppingList = document.querySelector('#shopping-list');
@@ -79,16 +85,49 @@ function displayData(list) {
 async function deleteItem(id) {
         
     if (confirm("Biztosan törlöd?")) {
-
+        console.log(itemList)
         const res=await fetch(`/list/${id}`,{
             method:'DELETE'
         })
 
-        const success=res.json().success
+        const re=await res.json()
+        if (re.success) {
+            itemList=itemList.filter(item=>item.id!=id)
+            displayData(itemList)
+        }
+        console.log(itemList)
+        
     }
-    loadData()
+    
 
     
 }
 
-loadData()
+function toWhoChanged(params) {
+    if (params=="minden") {
+        displayData(itemList)
+    }
+    else{
+       displayData(itemList.filter(item=>item.forWho==params))
+    }
+    //TODO: mind két szűrő között legyen és kapcsolat, ne vagy-vagy
+}
+
+function shopChanged(params) {
+    if (params=="minden") {
+        displayData(itemList)
+    }
+    else{
+        displayData(itemList.filter(item=>item.shop==params))
+    }
+    //TODO: mind két szűrő között legyen és kapcsolat, ne vagy-vagy
+   
+}
+
+async function init()
+{
+    await loadData()
+    await displayData(itemList)
+}
+
+init()

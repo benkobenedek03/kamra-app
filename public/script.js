@@ -1,9 +1,11 @@
+let itemsList=[];
+
 async function getData(){
     try {
         const response = await fetch('/items');
         const items = await response.json();
-        loadData(items)
-        return items;
+
+        itemsList=items
 
     } catch (error) {
         alert("nem sikerült betölteni az oldalt")
@@ -86,10 +88,8 @@ function loadData(items) {
 async function searchItem() {
 
     
-    const search = String(document.querySelector('#search').value)
-    const response = await fetch(`/items?search=${search}`)
-    const items = await response.json()
-    loadData(items)
+    const search = String(document.querySelector('#search').value.toLowerCase())
+    loadData(itemsList.filter(item=> item.name.toLowerCase().includes(search)))
     
     
 }
@@ -100,17 +100,26 @@ async function deleteProduct(id) {
     {
         const response = await fetch(`/items/${id}`, {method:"DELETE"})
         console.log(await response.json())
-        getData()
+        
+        itemsList=itemsList.filter(item=>item.id!=id)
+        loadData(itemsList)
     }
    
 }
 
-async function loadItems() {
-    const category = document.querySelector('#filter').value
+async function filterItems(param) {
+    if (param=="mind") {
+        loadData(itemsList)
+        return
+    }
+    if(param=="MISSING")
+    {
+        loadData(itemsList.filter(item=>item.quantity==0))
+        return
+    }
+    loadData(itemsList.filter(item=>item.category==param))
 
-    const res=await fetch(`/items?category=${category}`)
-    const products=await res.json()
-    loadData(products)
+    
 }
 
 async function changeQuantity(id, quantity) {
@@ -123,7 +132,10 @@ async function changeQuantity(id, quantity) {
              "Content-Type": "application/json",
         }
     })
-    getData()
+    const updatedItemId=itemsList.findIndex(item=>item.id==id)
+    itemsList[updatedItemId].quantity=quantity
+    loadData(itemsList)
+
 
 }
 
@@ -150,9 +162,13 @@ async function saveProduct(){
         }
     })
     console.log(await response.json())
-    await loadData(await getData()) 
+    await init()
     name.value=""
     quantity.value=1
     unit.value=""
 }
-getData()
+async function init(params) {
+    await getData()
+    loadData(itemsList)
+}
+init()
