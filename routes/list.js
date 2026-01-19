@@ -36,6 +36,7 @@ router.post('/', async (req,res)=> {
     let item=req.body
     item.id=Date.now()
     item.shop=item.shop.toLowerCase()
+    item.quantity=item.quantity<0?0:item.quantity
     list.push(item)
     writeFile(list)
     
